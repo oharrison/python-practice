@@ -1,61 +1,54 @@
-import csv, math
+import csv
 
-def csv_median(file_path, column_index = 0):
+def csv_mean(file_path, column_index = 0):
     """
     Args:
         file_path (str): The path to a file.
         column_index (Optional[int]): The index of a column in the file. Defaults to 0.
 
     Returns:
-        float/long/int: The median value of the column processed in the file.
+        float: The mean of the column processed in the file.
 
     Raises:
         IndexError: If column_index is greater than or equal to the length of a line.
         Exception: If error occurs while processing a line in the file.
 
     Examples:
-        >>> print(csv_median('/home/username/filename.ext', column_index = 0))
-        >>> print(csv_median('./filename.ext', column_index = 3))
-        >>> print(csv_median('./filename.ext'))
+        >>> print(csv_mean('/home/username/filename.ext', column_index = 0))
+        >>> print(csv_mean('./filename.ext', column_index = 3))
+        >>> print(csv_mean('./filename.ext'))
     """
     assert type(column_index) == int 
     assert type(file_path) == str
   
-    median = 0
+    mean = 0
     numbers_list = []
     with open(file_path, 'r') as file:
         data_lines = csv.reader(file)
+        
         for line_num, line in enumerate(data_lines):
-            
+
             line_length = len(line)
             current_line = line_num + 1
-
+            
             try:
                 if column_index >= line_length:
                     raise IndexError("column_index out of range for line %d" % current_line)
 
-                value = int(line[column_index])
+                value = float(line[column_index])
                 numbers_list.append(value)
             except Exception:
                 raise Exception("Error processing line %d" % current_line)
     
-    numbers_list.sort()
     numbers_list_length = len(numbers_list)
-
-    if numbers_list_length % 2 == 0:
-        midpoint = int(math.floor(numbers_list_length / 2) - 1)
-        midpoint_pair = (midpoint, midpoint + 1)
-        median = (numbers_list[midpoint_pair[0]] + numbers_list[midpoint_pair[1]]) / 2.0
-    else:
-        midpoint = int(math.floor(numbers_list_length / 2))
-        median = numbers_list[midpoint]
-
-    assert type(median) == float or type(median) == int or type(median) == long
-    return median
+    mean = float(sum(numbers_list) / numbers_list_length) 
+     
+    assert type(mean) == float
+    return mean
 
 
 if __name__ == '__main__':
 
     file_path = 'numbers.txt'
-    median = csv_median(file_path)
-    print(median)
+    mean = csv_mean(file_path)
+    print(mean)
