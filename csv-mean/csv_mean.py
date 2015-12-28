@@ -41,7 +41,7 @@ def csv_mean(file_path, column_index = 0):
                 raise Exception("Error processing line %d" % current_line)
     
     numbers_list_length = len(numbers_list)
-    mean = float(sum(numbers_list) / numbers_list_length) 
+    mean = sum(numbers_list) / numbers_list_length
      
     assert type(mean) == float
     return mean
