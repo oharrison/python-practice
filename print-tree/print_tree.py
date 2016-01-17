@@ -17,7 +17,25 @@ class Tree:
                 current_level = [node for node in next_level]
             else:
                 current_level = None
-    
+
+    def recurse_print(self, current_level):
+        if current_level == None:
+            return
+        else:
+            next_level = []
+            for node in current_level:
+                print(node.get_data(), end="\t")
+                if node.has_children():
+                    for child_node in node.get_children():
+                        next_level.append(child_node)
+            print()
+            if next_level:
+                current_level = next_level
+            else:
+                current_level = None
+
+            self.recurse_print(current_level)
+
 class Node:
     def __init__(self, data, children = None):
         assert children == None or type(children) == list
@@ -42,7 +60,14 @@ class Node:
 
 
 if __name__ == '__main__':
+
+    # create tree
     root_node = Node(1)
     root_node.set_children([Node(2, [Node(4, [Node(8)]), Node(5), Node(6)]), Node(3, [Node(7, [Node(9), Node(10)])])])
     tree = Tree(root_node)
+
+    # iterative print
     tree.print_tree()
+
+    # recursive print
+    tree.recurse_print([root_node])
