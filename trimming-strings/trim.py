@@ -22,7 +22,7 @@ def right_trim(string):
         string (str): The string to be left trimmed.
 
     Returns:
-        str: string with empty spaces at the end of the string removed
+        str: string with spaces at the end of the string removed
 
     Examples:
         >>> right_trim('the quick brown fox jumped over the lazy dog    ')
@@ -39,7 +39,7 @@ def left_and_right_trim(string):
         string (str): The string to be left trimmed.
 
     Returns:
-        str: string with empty spaces at the start and end of the string removed
+        str: string with spaces at the start and end of the string removed
 
     Examples:
         >>> left_and_right_trim('    the quick brown fox jumped over the lazy dog    ')
